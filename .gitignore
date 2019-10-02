@@ -1,6 +1,6 @@
 .DS_Store
 env.py
-.ipynb_checkpoints/
+.ipynb_checkpoints
+.vscode
 __pycache__
-.vscode/
-.__pycache__/
+package.json
