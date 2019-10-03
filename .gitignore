@@ -3,4 +3,4 @@ env.py
 .ipynb_checkpoints
 .vscode
 __pycache__
-package.json
+.package.json
