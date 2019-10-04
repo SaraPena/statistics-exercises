@@ -160,11 +160,34 @@ url = get_url(user, password, host, 'employees')
 salaries = pd.read_sql("SELECT * FROM salaries WHERE to_date = '9999-01-01'", url)
 
 salaries.describe()
-salaries.salary.mean()
-salaries.salary.std()
+mean_salary = salaries.salary.mean()
+std_salary = salaries.salary.std()
 
-y = stats.norm(salaries.salary.mean(),salaries.salary.std()).pdf(x)
+y = stats.norm(mean_salary,std_salary).pdf(x)
 x = np.arange(salaries.salary.mean()-4*salaries.salary.std(), salaries.salary.mean()+4*salaries.salary.std(), 100)
 x = np.arange(0,120000)
 plt.plot(x,y)
 
+stats.norm(mean_salary,std_salary).cdf(59999.99)
+
+(stats.norm(mean_salary,std_salary).rvs(10000) < 60000).mean()
+
+stats.norm(mean_salary,std_salary).sf(95000)
+
+(stats.norm(mean_salary,std_salary).rvs(10000) > 95000).mean()
+
+more_than_sixty_five_thou = stats.norm(mean_salary,std_salary).sf(65000)
+more_than_eighty_thou = stats.norm(mean_salary,std_salary).sf(80000)
+
+more_than_sixty_five_thou - more_than_eighty_thou
+
+simulation_sixty_fve_thou = (stats.norm(mean_salary,std_salary).rvs(10000) > 65000).mean()
+simutation_eighty_thou = (stats.norm(mean_salary,std_salary).rvs(10000) > 80000).mean()
+
+simulation_sixty_fve_thou - simutation_eighty_thou
+
+dist.isf(.05)
+
+stats.norm(mean_salary,std_salary).cdf(80000) - stats.norm(mean_salary,std_salary).sf(65000)
+
+np.percentile(salaries.salary, 95)
