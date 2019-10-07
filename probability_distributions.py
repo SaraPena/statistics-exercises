@@ -159,6 +159,7 @@ url = get_url(user, password, host, 'employees')
 
 salaries = pd.read_sql("SELECT * FROM salaries WHERE to_date = '9999-01-01'", url)
 
+
 salaries.describe()
 mean_salary = salaries.salary.mean()
 std_salary = salaries.salary.std()
@@ -168,9 +169,13 @@ x = np.arange(salaries.salary.mean()-4*salaries.salary.std(), salaries.salary.me
 x = np.arange(0,120000)
 plt.plot(x,y)
 
+# a. What percent of employees earn less than $60,000
+
 stats.norm(mean_salary,std_salary).cdf(59999.99)
 
 (stats.norm(mean_salary,std_salary).rvs(10000) < 60000).mean()
+
+# b. What percent of employees earn more than $95,000
 
 stats.norm(mean_salary,std_salary).sf(95000)
 
